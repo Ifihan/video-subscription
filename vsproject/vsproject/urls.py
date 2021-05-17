@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 import vsapp.urls
 from vsapp.views import LandingPageView
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.auth.views import LoginView,LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('vsapp/',include('vsapp.urls',namespace='vsapp')),
     path('',LandingPageView.as_view(),name='landing-page')
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
