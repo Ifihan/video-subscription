@@ -10,7 +10,7 @@ class LandingPageView(TemplateView):
     template_name = 'vsapp/landing.html'
 
 
-class MovieListView(ListView):
+class MovieListView(ListView,LoginRequiredMixin):
     model = Movies
     template_name = 'vsapp/movies_list.html'  
 
@@ -20,7 +20,7 @@ class MovieListView(ListView):
         return context     
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(DetailView,LoginRequiredMixin):
     model = Movies
     template_name= 'vsapp/movies_detail.html'
 

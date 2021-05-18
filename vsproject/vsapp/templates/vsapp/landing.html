@@ -18,8 +18,6 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="{% url 'vsapp:movies_list' %}">Movies</a>
-              <a class="nav-link" href="#">Features</a>
-              <a class="nav-link" href="#">Pricing</a>
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </div>
           </div>
@@ -29,7 +27,7 @@
       <h2 style="text-align: center">Hello there</h2>
       <br>
       <div class="container">
-        <h1 class="jumbotron">Welcome to our site, please login or signup to access our database of movies</h1>
+        <h1 class="jumbotron">Welcome to our site, please login or <a href="{% url 'signup' %}">signup</a> to access our database of movies</h1>
       </div>
 </body>
 </html>
