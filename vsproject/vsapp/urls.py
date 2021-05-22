@@ -1,6 +1,6 @@
 from django.urls import path
-import vsapp
-from vsapp import views
+#import vsapp
+#from vsapp import views
 from .views import MovieListView,MovieDetailView
 
 app_name = 'vsapp'

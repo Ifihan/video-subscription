@@ -3,15 +3,18 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.EmailField()
 
 class Movies(models.Model):
     mainimage = models.ImageField(upload_to='vsapp/', blank=True)
     name = models.CharField(max_length=50)
     slug = models.SlugField()
-    preview_text = models.TextField(max_length=50, verbose_name='Preview Text')
-    detail_text = models.TextField(max_length=100, verbose_name='Detail Text')
-    price = models.FloatField()
+    genre = models.CharField(max_length=20,default='genre')
+    release_period = models.CharField(max_length=20,default='release period')
+    preview_text = models.TextField(max_length=150, verbose_name='Preview Text')
+    detail_text = models.TextField(max_length=200, verbose_name='Detail Text')
 
     class Meta:
         verbose_name = 'Movie'
