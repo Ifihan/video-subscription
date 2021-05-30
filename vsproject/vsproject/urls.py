@@ -22,6 +22,10 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView,LogoutView
 from vsapp.views import SignUpView
 
+admin.site.site_header = 'Vsapp Administration'
+admin.site.site_title = 'Movies Administration'
+admin.site.index_title = 'Movies Administration'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('vsapp/',include('vsapp.urls',namespace='vsapp')),

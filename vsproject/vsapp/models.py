@@ -14,7 +14,7 @@ class Movies(models.Model):
     genre = models.CharField(max_length=20,default='genre')
     release_period = models.CharField(max_length=20,default='release period')
     preview_text = models.TextField(max_length=150, verbose_name='Preview Text')
-    detail_text = models.TextField(max_length=200, verbose_name='Detail Text')
+    detail_text = models.TextField(max_length=500, verbose_name='Detail Text')
 
     class Meta:
         verbose_name = 'Movie'

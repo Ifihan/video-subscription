@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.views.generic import TemplateView,ListView,DetailView,CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Movies
@@ -23,7 +23,22 @@ class MovieListView(ListView,LoginRequiredMixin):
 
 class MovieDetailView(DetailView,LoginRequiredMixin):
     model = Movies
+    context_object_name = 'movies'
     template_name= 'vsapp/movies_detail.html'
+    queryset = Movies.objects.all()
+
+    """def get_context_data(self, **kwargs):
+        context = super(MovieDetailView, self).get_context_data(**kwargs)
+        Movies = self.get_movies()
+        return context
+
+    def get_movies(self):
+        moviess = get_object_or_404(Movies, slug=self.kwargs["slug"])
+        return moviess
+
+    def get_queryset(self):
+        Movies = self.get_movies()
+        return Movies.objects.all()"""
 
 
 class SignUpView(CreateView):

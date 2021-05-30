@@ -58,7 +58,7 @@
 </div>
 <br>
   
-<h2 style="text-align: center;">{{movie.name}}</h2>
+<h2 style="text-align: center;">{{object.name}}</h2>
 <br>
 
 <main class="container">
@@ -66,13 +66,13 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">{{movie.genre}}</strong>
-          <h3 class="mb-0">{{movie.name}}</h3>
-          <div class="mb-1 text-muted">{{movie.release_period}}</div>
-          <p class="card-text mb-auto">{{movie.preview_text}}</p>
+          <strong class="d-inline-block mb-2 text-primary">{{object.genre}}</strong>
+          <h3 class="mb-0">{{object.name}}</h3>
+          <div class="mb-1 text-muted">{{object.release_period}}</div>
+          <p class="card-text mb-auto">{{object.preview_text}}</p>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg src="media/{{ movie.mainimage }}" class="bd-placeholder-img" width="200" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">media/{{movie.mainimage}}</text></svg>
+          <svg src="{{ object.mainimage }}" class="bd-placeholder-img" width="200" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{object.mainimage}}</text></svg>
           <!--div class="img-wrap"> 
             <img src="media/{{ movie.mainimage }}" style="width: 200%; height: 250px;">
          </div-->
@@ -81,6 +81,7 @@
     </div>
 </main>
 <br>
-<div class="jumbotron" ><p style="text-align: center;" class="container">{{movie.detail_text}}</p></div>
-  </body>
+<div class="jumbotron" ><p style="text-align: center;" class="container">{{object.detail_text}}</p></div>
+  
+</body>
 </html>
