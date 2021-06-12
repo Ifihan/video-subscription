@@ -1,9 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import TemplateView,ListView,DetailView,CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Movies
+from .models import Movies,Review
 from .filters import MoviesFilter
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm,ReviewForm
 
 # Create your views here.
 class LandingPageView(TemplateView):
@@ -47,3 +47,9 @@ class SignUpView(CreateView):
 
     def get_success_url(self):
         return reverse('login')
+
+class ReviewCreate(CreateView):
+    model = Review
+    form_class = ReviewForm    
+    context_object_name = 'reviews'
+    template_name = 'vsapp/movies_detail.page'    

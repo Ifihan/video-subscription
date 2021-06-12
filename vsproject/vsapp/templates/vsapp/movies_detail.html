@@ -82,6 +82,21 @@
 </main>
 <br>
 <div class="jumbotron" ><p style="text-align: center;" class="container">{{object.detail_text}}</p></div>
-  
+
+<h3 style="text-align: center;" >Add Review  🙃😶</h3>
+
+{% for review in reviews  %}
+<div class="container-fluid"> 
+  <div class="col Movie-form">
+    <form class="form-group" action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <!--input style="text-align: center;" type="submit" class="btn btn-movie" / -->
+      <input type="text" name="{{review.comment}}" >
+    </form>
+  </div>
+</div>
+{% endfor %}
+
 </body>
 </html>

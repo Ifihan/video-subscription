@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator,MaxValueValidator
+from django.utils import timezone
 
 # Create your models here.
 class User(AbstractUser):
@@ -22,3 +24,14 @@ class Movies(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    movie = models.ForeignKey(Movies,related_name='reviews',on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    comment = models.TextField(max_length=1000)
+    rating = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
+    created_date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.comment
