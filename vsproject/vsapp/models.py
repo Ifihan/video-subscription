@@ -17,6 +17,9 @@ class Movies(models.Model):
     release_period = models.CharField(max_length=20,default='release period')
     preview_text = models.TextField(max_length=150, verbose_name='Preview Text')
     detail_text = models.TextField(max_length=500, verbose_name='Detail Text')
+    directors = models.CharField(max_length=200,null=True)
+    writers = models.CharField(max_length=200,null=True)
+    stars  = models.CharField(max_length=200,null=True)
 
     class Meta:
         verbose_name = 'Movie'
