@@ -124,9 +124,8 @@ AUTH_USER_MODEL = 'vsapp.User'
 
 STATIC_URL = '/static/'
 
-
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'tailwind'
 CRISPY_ALLOWED_TEMPLATE_PACK = 'tailwind'

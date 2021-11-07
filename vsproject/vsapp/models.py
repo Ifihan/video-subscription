@@ -32,9 +32,10 @@ class Movies(models.Model):
 class Review(models.Model):
     movie = models.ForeignKey(Movies,related_name='reviews',on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=100,default="Unknown user")
     comment = models.TextField(max_length=1000)
     rating = models.IntegerField(default=1,validators=[MaxValueValidator(5),MinValueValidator(1)])
-    created_date = models.DateField(default=timezone.now)
+    pub_date = models.DateTimeField('date published',default=timezone.now)
 
     def __str__(self):
         return self.comment
