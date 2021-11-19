@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm,Textarea
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth import get_user_model
 from .models import Review
@@ -12,22 +13,11 @@ class CustomUserCreationForm(UserCreationForm):
        field_classes = { 'username':UsernameField }
 
 
-class ReviewForm(forms.ModelForm):
-    CHOICES = (
-            (1, 1),
-            (2, 2),
-            (3, 3),
-            (4, 4),
-            (5, 5),
-        )
 
-    rating = forms.ChoiceField(
-        choices=CHOICES, 
-        required=True,
-        label='Rate this movie',
-        help_text='Choose a rate 1 = Worst and 5 = Best'
-    )
-
+class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ['rating', 'comment']
+        fields = ['user_name', 'rating', 'comment']
+        widgets = {
+            'comment': Textarea(attrs={'cols': 40, 'rows': 15})
+        }

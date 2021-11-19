@@ -4,6 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Movies,Review
 from .filters import MoviesFilter
 from .forms import CustomUserCreationForm,ReviewForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import datetime
 
 # Create your views here.
 class LandingPageView(TemplateView):
@@ -52,7 +55,7 @@ class ReviewCreate(CreateView):
     model = Review
     form_class = ReviewForm    
     context_object_name = 'reviews'
-    template_name = 'vsapp/movies_detail.page'    
+    template_name = 'reviews/review.html'   
 
 
 def review_list(request):
@@ -65,4 +68,24 @@ def review_detail(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
     return render(request, 'reviews/review_detail.html', {'review': review})
 
+def add_review(request, movie_id):
+    movie = get_object_or_404(Movies, pk=movie_id)
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+        rating = form.cleaned_data['rating']
+        comment = form.cleaned_data['comment']
+        user_name = form.cleaned_data['user_name']
+        review = Review()
+        review.movie = movie
+        review.user_name = user_name
+        review.rating = rating
+        review.comment = comment
+        review.pub_date = datetime.datetime.now()
+        review.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('vsapp:movies_detail', args=[movie.id,]))
+
+    return render(request, 'vsapp/movies_detail.html', {'movie': movie, 'form': form})    
 
