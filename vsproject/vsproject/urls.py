@@ -20,8 +20,6 @@ from vsapp.views import LandingPageView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView,LogoutView
-from vsapp.views import SignUpView
-
 admin.site.site_header = 'Vsapp Administration'
 admin.site.site_title = 'Movies Administration'
 admin.site.index_title = 'Movies Administration'
@@ -32,5 +30,5 @@ urlpatterns = [
     path('',LandingPageView.as_view(),name='landing-page'),
     path('login/',LoginView.as_view(),name='login'),
     path('logout/',LogoutView.as_view(),name='logout'),
-    path('signup/',SignUpView.as_view(),name='signup')
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

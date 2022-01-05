@@ -13,7 +13,7 @@ class LandingPageView(TemplateView):
     template_name = 'vsapp/landing.html'
 
 
-class MovieListView(ListView,LoginRequiredMixin):
+class MovieListView(ListView):
     model = Movies
     template_name = 'vsapp/movies_list.html'  
     context_object_name = 'movies'
@@ -30,32 +30,15 @@ class MovieDetailView(DetailView,LoginRequiredMixin):
     template_name= 'vsapp/movies_detail.html'
     queryset = Movies.objects.all()
 
-    """def get_context_data(self, **kwargs):
-        context = super(MovieDetailView, self).get_context_data(**kwargs)
-        Movies = self.get_movies()
-        return context
-
-    def get_movies(self):
-        moviess = get_object_or_404(Movies, slug=self.kwargs["slug"])
-        return moviess
-
-    def get_queryset(self):
-        Movies = self.get_movies()
-        return Movies.objects.all()"""
-
-
-class SignUpView(CreateView):
-    template_name = 'vsapp/signup.html'
-    form_class = CustomUserCreationForm
-
-    def get_success_url(self):
-        return reverse('login')
 
 class ReviewCreate(CreateView):
     model = Review
     form_class = ReviewForm    
     context_object_name = 'reviews'
     template_name = 'reviews/review.html'   
+
+    def get_success_url(self):
+        return reverse('vsapp:movies_detail', kwargs={'slug':Review.slug})
 
 
 def review_list(request):
@@ -68,24 +51,4 @@ def review_detail(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
     return render(request, 'reviews/review_detail.html', {'review': review})
 
-def add_review(request, movie_id):
-    movie = get_object_or_404(Movies, pk=movie_id)
-    form = ReviewForm(request.POST)
-    if form.is_valid():
-        rating = form.cleaned_data['rating']
-        comment = form.cleaned_data['comment']
-        user_name = form.cleaned_data['user_name']
-        review = Review()
-        review.movie = movie
-        review.user_name = user_name
-        review.rating = rating
-        review.comment = comment
-        review.pub_date = datetime.datetime.now()
-        review.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('vsapp:movies_detail', args=[movie.id,]))
-
-    return render(request, 'vsapp/movies_detail.html', {'movie': movie, 'form': form})    
 
