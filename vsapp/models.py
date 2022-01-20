@@ -38,7 +38,7 @@ class Review(models.Model):
     user_name = models.CharField(max_length=100, default="Unknown user")
     comment = models.TextField(max_length=1000)
     rating = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
-    slug = models.SlugField(default='')
+    slug = models.SlugField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
 
     def __str__(self):
